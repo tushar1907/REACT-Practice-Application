@@ -7,9 +7,11 @@ class App extends Component {
 
   state = {
     person: [
-      {name:'Max' , age: 28 },
-      {name:'Samnu' , age: 26 }
-    ]
+      {id:'adtf1', name:'Max' , age: 28 },
+      {id:'plog7', name:'Samnu' , age: 26 }
+    ],
+    otherState: 'some value person',
+    showPerson: false
   }
 
   SateHandler = (newValue) => {
@@ -33,16 +35,46 @@ class App extends Component {
       ]
     })
   }
+
+  deletePersonHandler = (personIndex) => {
+    const persons = [...this.state.person]
+    persons.splice(personIndex,1)
+    this.setState({ person: persons })
+  }
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPerson;
+    this.setState({ showPerson : !doesShow})
+  }
   render() {
+
+    let persons = null;
+
+    if(this.state.showPerson){
+      persons = (
+        
+        <div>
+          {this.state.person.map((p,index)=>{
+            return <Person 
+            click = {() => this.deletePersonHandler(index)}
+            name={p.name} 
+            age={p.age} 
+            key={p.id}/>
+          })}
+        {/* <Person click={this.SateHandler.bind(this,"Suman")} 
+        name={this.state.person[0].name}
+        age={this.state.person[0].age}> my hobbies are XYZ</Person>
+        <Person name={this.state.person[1].name} age={this.state.person[1].age} change={this.nameChangedHandler}/>
+        <Person /> */}
+        </div>
+      )
+    }
     return (
       <div className="App">
        <h1>Hi I am a React App</h1>
        <button onClick={this.SateHandler.bind(this,"Sanjeev")}>Switch</button>
-       <Person click={this.SateHandler.bind(this,"Suman")} 
-       name={this.state.person[0].name}
-       age={this.state.person[0].age}> my hobbies are XYZ</Person>
-       <Person name={this.state.person[1].name} age={this.state.person[1].age} change={this.nameChangedHandler}/>
-       <Person />
+       <button onClick={this.togglePersonsHandler}>Switch Person</button> 
+       {persons}      
       </div>
     );
   }
