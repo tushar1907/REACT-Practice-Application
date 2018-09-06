@@ -8,9 +8,9 @@ const person = (props) => {
             <p onClick={props.click}> my name is {props.name} and my age is {props.age}</p>
             <p> {props.children} </p>
             <input onChange={props.change} value={props.name}/>
-        </div>
-    
+        </div>    
     )
 }
+
 
 export default person;
