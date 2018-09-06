@@ -29,14 +29,21 @@ class App extends Component {
     
   }
 
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event, id) => {
     
-    this.setState({      
-      person: [
-        {name:"Tushar" , age: 28 },
-        {name:event.target.value , age: 30 }
-      ]
+    const personIndex = this.state.person.findIndex(p => {
+      return p.id == id;
     })
+
+    const person = {...this.state.person[personIndex]}
+
+    person.name = event.target.value
+
+    const persons = [...this.state.person]
+
+    persons[personIndex] = person
+
+    this.setState({ person: persons})
   }
 
   inputChangedHandler = (event) => {
@@ -61,15 +68,16 @@ class App extends Component {
     let persons = null;
 
     if(this.state.showPerson){
-      persons = (
-        
-        <div>
-          {this.state.person.map((p,index)=>{
+      
+      persons = (        
+        <div>          
+          {this.state.person.map((person,index)=>{
             return <Person 
-            click = {() => this.deletePersonHandler(index)}
-            name={p.name} 
-            age={p.age} 
-            key={p.id}/>
+            click = {() => this.deletePersonHandler(index)} 
+            name={person.name} 
+            age={person.age} 
+            key={person.id}
+            changed = {(event) => this.nameChangedHandler(event, person.id)}/>
           })}
         {/* <Person click={this.SateHandler.bind(this,"Suman")} 
         name={this.state.person[0].name}
@@ -85,14 +93,14 @@ class App extends Component {
     }
     return (
       <div className="App">
-       {/* <h1>Hi I am a React App</h1>
+       <h1>Hi I am a React App</h1>
        <button onClick={this.SateHandler.bind(this,"Sanjeev")}>Switch</button>
        <button onClick={this.togglePersonsHandler}>Switch Person</button> 
-       {persons}       */}
-       <UserInput change={this.inputChangedHandler} value={this.state.username}/>
+       {persons}      
+       {/* <UserInput change={this.inpux  tChangedHandler} value={this.state.username}/>
        <UserOutput userName = {this.state.username}/>
        <UserOutput userName = "Tushar"/>
-       <UserOutput userName = "Tushar"/>
+       <UserOutput userName = "Tushar"/> */}
       </div>
     );
   }
