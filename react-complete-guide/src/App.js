@@ -14,17 +14,22 @@ class App extends Component {
       {id:'plog7', name:'Samnu' , age: 26 }
     ],
     otherState: 'some value person',
-    showPerson: false
+    showPerson: false,
+    string: ''
   }
 
   SateHandler = (newValue) => {
     console.log("was clicked !")
 
+    // this.setState({
+    //   person: [
+    //     {name:newValue , age: 28 },
+    //     {name:'Samnu' , age: 30 }
+    //   ]
+    // })
+
     this.setState({
-      person: [
-        {name:newValue , age: 28 },
-        {name:'Samnu' , age: 30 }
-      ]
+      string: newValue
     })
     
   }
@@ -93,14 +98,16 @@ class App extends Component {
     }
     return (
       <div className="App">
-       <h1>Hi I am a React App</h1>
+       {/* <h1>Hi I am a React App</h1>
        <button onClick={this.SateHandler.bind(this,"Sanjeev")}>Switch</button>
        <button onClick={this.togglePersonsHandler}>Switch Person</button> 
-       {persons}      
-       {/* <UserInput change={this.inpux  tChangedHandler} value={this.state.username}/>
+       {persons}       */}
+       {/* <UserInput change={this.inputChangedHandler} value={this.state.username}/>
        <UserOutput userName = {this.state.username}/>
        <UserOutput userName = "Tushar"/>
        <UserOutput userName = "Tushar"/> */}
+       <input type="text"  value={this.state.string}  onChange={this.SateHandler.bind(this,this.state.string) }/>
+       <p>{this.state.string}</p>
       </div>
     );
   }
