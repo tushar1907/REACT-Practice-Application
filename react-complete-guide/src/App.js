@@ -4,6 +4,7 @@ import './App.css';
 import Person from './Person/Person'
 import UserInput from './UserInput/UserInput'
 import UserOutput from './UserOutput/UserOutput'
+import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
 
@@ -21,16 +22,14 @@ class App extends Component {
   SateHandler = (newValue) => {
     console.log("was clicked !")
 
-    // this.setState({
-    //   person: [
-    //     {name:newValue , age: 28 },
-    //     {name:'Samnu' , age: 30 }
-    //   ]
-    // })
-
     this.setState({
-      string: newValue
+      person: [
+        {name:newValue , age: 28 },
+        {name:'Samnu' , age: 30 }
+      ]
     })
+
+    
     
   }
 
@@ -69,7 +68,18 @@ class App extends Component {
     this.setState({ showPerson : !doesShow})
   }
   render() {
-
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      border: '1px inherit blue',
+      padding: '8px',
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
+    }
     let persons = null;
 
     if(this.state.showPerson){
@@ -93,24 +103,30 @@ class App extends Component {
         change={this.nameChangedHandler}/>
         <Person /> */}
         </div>
-
       )
+
+      style.backgroundColor =  'red'
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
     return (
+      <StyleRoot>
       <div className="App">
-       {/* <h1>Hi I am a React App</h1>
+       <h1>Hi I am a React App</h1>
        <button onClick={this.SateHandler.bind(this,"Sanjeev")}>Switch</button>
-       <button onClick={this.togglePersonsHandler}>Switch Person</button> 
-       {persons}       */}
+       <button style={style} onClick={this.togglePersonsHandler}>Switch Person</button> 
+       {persons}      
        {/* <UserInput change={this.inputChangedHandler} value={this.state.username}/>
        <UserOutput userName = {this.state.username}/>
        <UserOutput userName = "Tushar"/>
        <UserOutput userName = "Tushar"/> */}
-       <input type="text"  value={this.state.string}  onChange={this.SateHandler.bind(this,this.state.string) }/>
-       <p>{this.state.string}</p>
+       
       </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
