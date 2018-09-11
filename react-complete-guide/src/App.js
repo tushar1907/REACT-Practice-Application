@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person'
 import UserInput from './UserInput/UserInput'
 import UserOutput from './UserOutput/UserOutput'
@@ -106,7 +106,7 @@ class App extends Component {
     }
     return (
       
-      <div className="App">
+      <div className={classes.App}>
        <h1>Hi I am a React App</h1>
        <button onClick={this.SateHandler.bind(this,"Sanjeev")}>Switch</button>
        <button style={style} onClick={this.togglePersonsHandler}>Switch Person</button> 
