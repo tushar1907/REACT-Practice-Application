@@ -4,6 +4,7 @@ import classes from './App.css';
 import Person from './Person/Person'
 import UserInput from './UserInput/UserInput'
 import UserOutput from './UserOutput/UserOutput'
+import ErrorHandler from './ErrorHandler/ErrorHandler'
 
 class App extends Component {
 
@@ -83,12 +84,14 @@ class App extends Component {
       persons = (        
         <div>          
           {this.state.person.map((person,index)=>{
-            return <Person 
+            return <ErrorHandler key={person.id}>
+              <Person 
             click = {() => this.deletePersonHandler(index)} 
             name={person.name} 
             age={person.age} 
-            key={person.id}
+            
             changed = {(event) => this.nameChangedHandler(event, person.id)}/>
+            </ErrorHandler>
           })}
         {/* <Person click={this.SateHandler.bind(this,"Suman")} 
         name={this.state.person[0].name}
