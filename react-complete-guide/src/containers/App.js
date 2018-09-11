@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import classes from './App.css';
-import Person from './Person/Person'
-import UserInput from './UserInput/UserInput'
-import UserOutput from './UserOutput/UserOutput'
-import ErrorHandler from './ErrorHandler/ErrorHandler'
+import Person from '../components/Persons/Person/Person'
+import UserInput from '../components/UserInput/UserInput'
+import UserOutput from '../components/UserOutput/UserOutput'
+import ErrorHandler from '../components/ErrorHandler/ErrorHandler'
 
 class App extends Component {
 
