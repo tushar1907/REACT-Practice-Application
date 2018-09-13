@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 
 import classes from './App.css';
-import Person from '../components/Persons/Person/Person'
-import UserInput from '../components/UserInput/UserInput'
-import UserOutput from '../components/UserOutput/UserOutput'
-import ErrorHandler from '../components/ErrorHandler/ErrorHandler'
+
+import Persons from '../components/Persons/Persons'
+
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
 
   state = {
     username: 'tushar1907',
     person: [
-      {id:'adtf1', name:'Max' , age: 28 },
-      {id:'plog7', name:'Samnu' , age: 26 }
+      { id: 'adtf1', name: 'Max', age: 28 },
+      { id: 'plog7', name: 'Samnu', age: 26 }
     ],
     otherState: 'some value person',
     showPerson: false,
@@ -24,22 +24,19 @@ class App extends Component {
 
     this.setState({
       person: [
-        {name:newValue , age: 28 },
-        {name:'Samnu' , age: 30 }
+        { name: newValue, age: 28 },
+        { name: 'Samnu', age: 30 }
       ]
     })
-
-    
-    
   }
 
   nameChangedHandler = (event, id) => {
-    
+
     const personIndex = this.state.person.findIndex(p => {
-      return p.id == id;
+      return p.id === id;
     })
 
-    const person = {...this.state.person[personIndex]}
+    const person = { ...this.state.person[personIndex] }
 
     person.name = event.target.value
 
@@ -47,25 +44,25 @@ class App extends Component {
 
     persons[personIndex] = person
 
-    this.setState({ person: persons})
+    this.setState({ person: persons })
   }
 
   inputChangedHandler = (event) => {
-    
-    this.setState({      
+
+    this.setState({
       username: event.target.value
     })
   }
 
   deletePersonHandler = (personIndex) => {
     const persons = [...this.state.person]
-    persons.splice(personIndex,1)
+    persons.splice(personIndex, 1)
     this.setState({ person: persons })
   }
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPerson;
-    this.setState({ showPerson : !doesShow})
+    this.setState({ showPerson: !doesShow })
   }
   render() {
     const style = {
@@ -75,52 +72,33 @@ class App extends Component {
       border: '1px inherit blue',
       padding: '8px',
       cursor: 'pointer'
-      
+
     }
     let persons = null;
 
-    if(this.state.showPerson){
-      
-      persons = (        
-        <div>          
-          {this.state.person.map((person,index)=>{
-            return <ErrorHandler key={person.id}>
-              <Person 
-            click = {() => this.deletePersonHandler(index)} 
-            name={person.name} 
-            age={person.age} 
-            
-            changed = {(event) => this.nameChangedHandler(event, person.id)}/>
-            </ErrorHandler>
-          })}
-        {/* <Person click={this.SateHandler.bind(this,"Suman")} 
-        name={this.state.person[0].name}
-        age={this.state.person[0].age}> my hobbies are XYZ</Person>
-        <Person 
-        name={this.state.person[1].name} 
-        age={this.state.person[1].age} 
-        change={this.nameChangedHandler}/>
-        <Person /> */}
+    if (this.state.showPerson) {
+
+      persons = (
+        <div>
+          <Persons
+            person={this.state.person}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler} />
         </div>
       )
 
-      style.backgroundColor =  'red'
-      
+      style.backgroundColor = 'red'
+
     }
     return (
-      
+
       <div className={classes.App}>
-       <h1>Hi I am a React App</h1>
-       <button onClick={this.SateHandler.bind(this,"Sanjeev")}>Switch</button>
-       <button style={style} onClick={this.togglePersonsHandler}>Switch Person</button> 
-       {persons}      
-       {/* <UserInput change={this.inputChangedHandler} value={this.state.username}/>
-       <UserOutput userName = {this.state.username}/>
-       <UserOutput userName = "Tushar"/>
-       <UserOutput userName = "Tushar"/> */}
-       
+        <Cockpit
+          showPerson={this.state.person}
+          person={this.state.person}></Cockpit>
+        {persons}
       </div>
-      
+
     );
   }
 }
