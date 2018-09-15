@@ -8,16 +8,33 @@ import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
 
-  state = {
-    username: 'tushar1907',
-    person: [
-      { id: 'adtf1', name: 'Max', age: 28 },
-      { id: 'plog7', name: 'Samnu', age: 26 }
-    ],
-    otherState: 'some value person',
-    showPerson: false,
-    string: ''
+  constructor(props) {
+    super(props);
+    console.log('[App,js] Inside constructor',props)
+    this.state = {
+      username: 'tushar1907',
+      person: [
+        { id: 'adtf1', name: 'Max', age: 28 },
+        { id: 'plog7', name: 'Samnu', age: 4 },
+        { id: '5s8ds', name: 'Raja', age: 35 },
+        { id: 'a6s8d', name: 'Someshwar', age: 60 },
+        { id: '2de2r', name: 'Peeku', age: 15 }
+      ],
+      otherState: 'some value person',
+      showPerson: false,
+      string: ''
+    }
   }
+
+  componentWillMount(){
+    console.log('[App.js] Inside componentWillMount')
+  }
+
+  componentDidMount(){
+    console.log('[App.js] Inside componentDidMount')
+  }
+
+
 
   SateHandler = (newValue) => {
     console.log("was clicked !")
@@ -65,6 +82,7 @@ class App extends Component {
     this.setState({ showPerson: !doesShow })
   }
   render() {
+    console.log('[App.js] Inside render')
     const style = {
       backgroundColor: 'green',
       color: 'white',
@@ -79,11 +97,11 @@ class App extends Component {
     if (this.state.showPerson) {
 
       persons =
-          <Persons
-            person={this.state.person}
-            clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler} />
-        
+        <Persons
+          person={this.state.person}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler} />
+
 
       style.backgroundColor = 'red'
 
@@ -91,10 +109,10 @@ class App extends Component {
     return (
 
       <div className={classes.App}>
-        <Cockpit
+        <Cockpit appTitle={this.props.title}
           showPerson={this.state.showPerson}
           person={this.state.person}
-          togglePersonsHandler = {this.togglePersonsHandler}></Cockpit>
+          togglePersonsHandler={this.togglePersonsHandler}></Cockpit>
         {persons}
       </div>
 

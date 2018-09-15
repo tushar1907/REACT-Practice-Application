@@ -10,7 +10,7 @@ const cockpit = (props) => {
     let btnCLass = ''
     
     if(props.showPerson){
-        btnCLass = classes.red
+        btnCLass = classes.Red
     }
     if(props.person.length <= 1){
         assignedClasses.push(classes.red);
@@ -20,8 +20,8 @@ const cockpit = (props) => {
     }
      return (
         <div className={classes.Cockpit}>
-            <h1>Hi I am a React App</h1>
-            <p className={assignedClasses.join(' ')}> This is really Awesosme !</p>            
+            <h1>{props.appTitle}</h1>
+            <p className={assignedClasses.join(' ')}> List is empty </p>            
             <button className={btnCLass} onClick={props.togglePersonsHandler}>Switch Person</button>
         </div>
     );
