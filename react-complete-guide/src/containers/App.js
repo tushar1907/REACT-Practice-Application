@@ -78,14 +78,12 @@ class App extends Component {
 
     if (this.state.showPerson) {
 
-      persons = (
-        <div>
+      persons =
           <Persons
             person={this.state.person}
             clicked={this.deletePersonHandler}
             changed={this.nameChangedHandler} />
-        </div>
-      )
+        
 
       style.backgroundColor = 'red'
 
@@ -94,8 +92,9 @@ class App extends Component {
 
       <div className={classes.App}>
         <Cockpit
-          showPerson={this.state.person}
-          person={this.state.person}></Cockpit>
+          showPerson={this.state.showPerson}
+          person={this.state.person}
+          togglePersonsHandler = {this.togglePersonsHandler}></Cockpit>
         {persons}
       </div>
 

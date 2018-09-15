@@ -22,7 +22,7 @@ const cockpit = (props) => {
         <div className={classes.Cockpit}>
             <h1>Hi I am a React App</h1>
             <p className={assignedClasses.join(' ')}> This is really Awesosme !</p>            
-            <button className={btnCLass} onClick={this.togglePersonsHandler}>Switch Person</button>
+            <button className={btnCLass} onClick={props.togglePersonsHandler}>Switch Person</button>
         </div>
     );
 
