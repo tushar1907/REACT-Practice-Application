@@ -6,6 +6,8 @@ import Persons from '../components/Persons/Persons'
 
 import Cockpit from '../components/Cockpit/Cockpit';
 
+import WithClass from '../hoc/Auxillary/WithCLass'
+
 class App extends PureComponent {
 
   constructor(props) {
@@ -114,17 +116,14 @@ class App extends PureComponent {
 
     }
     return (
-      
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <Cockpit appTitle={this.props.title}
           showPerson={this.state.showPerson}
           person={this.state.person}
           togglePersonsHandler={this.togglePersonsHandler}></Cockpit>
         {persons}
-      </div>
-
+      </WithClass>
     );
-    
   }
 }
 
