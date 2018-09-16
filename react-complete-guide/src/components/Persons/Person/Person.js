@@ -25,6 +25,7 @@ class Person extends PureComponent {
                 <input type="text" onChange={this.props.changed} value={this.props.name} />
             </div>
         )
+        
     }
 }
 
