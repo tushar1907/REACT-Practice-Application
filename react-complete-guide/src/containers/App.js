@@ -4,7 +4,7 @@ import classes from './App.css';
 
 import Persons from '../components/Persons/Persons'
 
-import Cockpit from '../components/Cockpit/Cockpit'
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends PureComponent {
 
@@ -33,11 +33,6 @@ class App extends PureComponent {
   componentDidMount() {
     console.log('[App.js] Inside componentDidMount')
   }
-
-  //   shouldComponentUpdate(nextProps, nextState){
-  //     console.log('[App.js] Inside shouldComponentUpdate',nextProps,nextState)
-  //     return true;
-  // }
 
   componentWillUpdate(nextProps, nextState) {
     console.log('[App.js] Inside componentWillUpdate', nextProps, nextState)
@@ -119,7 +114,7 @@ class App extends PureComponent {
 
     }
     return (
-
+      
       <div className={classes.App}>
         <Cockpit appTitle={this.props.title}
           showPerson={this.state.showPerson}
