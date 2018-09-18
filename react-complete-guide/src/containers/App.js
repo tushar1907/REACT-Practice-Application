@@ -132,7 +132,8 @@ class App extends PureComponent {
     const doesShow = this.state.showPerson;
     this.setState((previousState, props) => {
       return { showPerson: !doesShow, toggleClicked: previousState.toggleClicked + 1 }
-    })
+    }
+)
   }
 
 }
