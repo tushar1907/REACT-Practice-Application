@@ -6,9 +6,50 @@ import Persons from '../components/Persons/Persons'
 
 import Cockpit from '../components/Cockpit/Cockpit';
 
-import WithClass from '../hoc/Auxillary/WithCLass'
+import withClass from '../hoc/Auxillary/withClass'
+
+import Aux from '../hoc/Auxillary/Auxillary'
 
 class App extends PureComponent {
+
+
+  render() {
+    console.log('[App.js] Inside render')
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      border: '1px inherit blue',
+      padding: '8px',
+      cursor: 'pointer'
+
+    }
+    let persons = null;
+
+    if (this.state.showPerson) {
+
+      persons =
+        <Persons
+          person={this.state.person}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler} />
+
+
+      style.backgroundColor = 'red'
+
+    }
+    return (
+      <Aux classes>
+        <Cockpit appTitle={this.props.title}
+          showPerson={this.state.showPerson}
+          person={this.state.person}
+          togglePersonsHandler={this.togglePersonsHandler}></Cockpit>
+        {persons}
+
+      </Aux>
+
+    );
+  }
 
   constructor(props) {
     super(props);
@@ -24,7 +65,8 @@ class App extends PureComponent {
       ],
       otherState: 'some value person',
       showPerson: false,
-      string: ''
+      string: '',
+      toggleClicked: 0
     }
   }
 
@@ -88,43 +130,11 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPerson;
-    this.setState({ showPerson: !doesShow })
+    this.setState((previousState, props) => {
+      return { showPerson: !doesShow, toggleClicked: previousState.toggleClicked + 1 }
+    })
   }
-  render() {
-    console.log('[App.js] Inside render')
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px inherit blue',
-      padding: '8px',
-      cursor: 'pointer'
 
-    }
-    let persons = null;
-
-    if (this.state.showPerson) {
-
-      persons =
-        <Persons
-          person={this.state.person}
-          clicked={this.deletePersonHandler}
-          changed={this.nameChangedHandler} />
-
-
-      style.backgroundColor = 'red'
-
-    }
-    return (
-      <WithClass classes={classes.App}>
-        <Cockpit appTitle={this.props.title}
-          showPerson={this.state.showPerson}
-          person={this.state.person}
-          togglePersonsHandler={this.togglePersonsHandler}></Cockpit>
-        {persons}
-      </WithClass>
-    );
-  }
 }
 
-export default App;
+export default withClass(App, classes.App);
