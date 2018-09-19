@@ -26,6 +26,7 @@ const cockpit = (props) => {
                 <h1>{props.appTitle}</h1>
                 <p className={assignedClasses.join(' ')}> List is empty </p>
                 <button className={btnCLass} onClick={props.togglePersonsHandler}>Switch Person</button>
+                <button onClick={props.login}>Log In</button>
             </Aux>
 
         // </div>

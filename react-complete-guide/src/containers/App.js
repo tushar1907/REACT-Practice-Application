@@ -10,46 +10,9 @@ import withClass from '../hoc/Auxillary/withClass'
 
 import Aux from '../hoc/Auxillary/Auxillary'
 
+export const AuthContext = React.createContext(false);
+
 class App extends PureComponent {
-
-
-  render() {
-    console.log('[App.js] Inside render')
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px inherit blue',
-      padding: '8px',
-      cursor: 'pointer'
-
-    }
-    let persons = null;
-
-    if (this.state.showPerson) {
-
-      persons =
-        <Persons
-          person={this.state.person}
-          clicked={this.deletePersonHandler}
-          changed={this.nameChangedHandler} />
-
-
-      style.backgroundColor = 'red'
-
-    }
-    return (
-      <Aux classes>
-        <Cockpit appTitle={this.props.title}
-          showPerson={this.state.showPerson}
-          person={this.state.person}
-          togglePersonsHandler={this.togglePersonsHandler}></Cockpit>
-        {persons}
-
-      </Aux>
-
-    );
-  }
 
   constructor(props) {
     super(props);
@@ -66,7 +29,8 @@ class App extends PureComponent {
       otherState: 'some value person',
       showPerson: false,
       string: '',
-      toggleClicked: 0
+      toggleClicked: 0,
+      authenticated: false
     }
   }
 
@@ -133,7 +97,51 @@ class App extends PureComponent {
     this.setState((previousState, props) => {
       return { showPerson: !doesShow, toggleClicked: previousState.toggleClicked + 1 }
     }
-)
+    )
+  }
+
+  loginHandler = () => {
+    this.setState({authenticated:true})
+  }
+
+  render() {
+    console.log('[App.js] Inside render')
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      border: '1px inherit blue',
+      padding: '8px',
+      cursor: 'pointer'
+
+    }
+    let persons = null;
+
+    if (this.state.showPerson) {
+
+      persons =
+        <Persons
+          person={this.state.person}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler} />
+
+
+      style.backgroundColor = 'red'
+
+    }
+    return (
+      <Aux classes>
+        <Cockpit appTitle={this.props.title}
+          showPerson={this.state.showPerson}
+          person={this.state.person}
+          login={this.loginHandler}
+          togglePersonsHandler={this.togglePersonsHandler}></Cockpit>
+        <AuthContext.Provider value={this.state.authenticated}>
+          {persons}
+        </AuthContext.Provider>
+      </Aux>
+
+    );
   }
 
 }
