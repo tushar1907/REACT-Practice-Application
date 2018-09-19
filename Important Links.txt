@@ -3,3 +3,9 @@ Introducing JSX: https://reactjs.org/docs/introducing-jsx.html
 Rendering Elements: https://reactjs.org/docs/rendering-elements.html
 Components & Props: https://reactjs.org/docs/components-and-props.html
 Listenable Events: https://reactjs.org/docs/events.html
+
+State & Lifecycle: https://reactjs.org/docs/state-and-lifecycle.html
+PropTypes: https://reactjs.org/docs/typechecking-with-proptypes.html
+Higher Order Components: https://reactjs.org/docs/higher-order-components.html
+Refs: https://reactjs.org/docs/refs-and-the-dom.html
+
